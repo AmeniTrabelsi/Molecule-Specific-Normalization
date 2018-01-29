@@ -11,7 +11,7 @@ A molecule specific normalization algorithm which adopts a robust surface fittin
 2. To apply MSN. You can use the function Surf_Fit:
 Example:
 
-[finaldata,~]=Surf_Fit(Modified_data(:,group1), Modified_data(:,group2), data_MZ, data_RT, thr)
+finaldata=Surf_Fit(Modified_data(:,group1), Modified_data(:,group2), data_MZ, data_RT, thr)
 
 Input:
 Modified_data: data to normalize.
