@@ -3,7 +3,7 @@ A molecule specific normalization algorithm which adopts a robust surface fittin
 
 
 ## A schematic work flow of the MSN method
-![pipeline](https://github.com/AmeniTrabelsi/Molecule-Specific-Normalization/Work_Flow.jpg)
+![pipeline](https://github.com/AmeniTrabelsi/Molecule-Specific-Normalization/blob/master/Work_Flow.jpg)
 
 ## How to run
 
