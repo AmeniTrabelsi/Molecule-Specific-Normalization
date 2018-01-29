@@ -1,8 +1,5 @@
 function [ff,datafitted]= fittingbysample (data,MZ,RT, ll)
 
-
-
-
 ind=1;
 outliers=[];
 vector=[1:size(data,1)];
@@ -33,8 +30,7 @@ while ~isempty(ind)
 
         [~, ~ ,~ ,indice] = testboxplot(SE, Cc, ll, 0,0)
         ind=indice(:,1);
-    
-%     [ind]=find(abs(SE(:))>3)
+ 
     [~,row]=data2vector(SE);
    
     
@@ -45,6 +41,5 @@ while ~isempty(ind)
     MZ(unique(row(ind)),:)=[];
     RT(unique(row(ind)),:)=[];
 end
-% figure()
-% hist(SE)
+
 

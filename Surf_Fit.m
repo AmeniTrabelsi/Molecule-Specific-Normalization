@@ -1,28 +1,29 @@
 function [finaldata,normdata]= Surf_Fit(Data1,Data2, data_MZ, data_RT, thr)
 
-% load('feature_ranks.mat')
+% Input:
+% Data1 and Data2: data to normalize.
+% data_MZ: M/Z data corresponding to the data.
+% data_RT: Retention Time data corresponding to the data.
+% thr: Boxplot Threshold (ex: 1.5, 2...)
+% 
+% Output:
+% 
+% finaldata: data after normalization using MSN.
 
 
 Data=[Data1, Data2];
 [feature_ranks]=rank_with_ttest(Data1,Data2);
+% Biomarkers are the first 27 metabolites in our data
 BiomarkersSel=feature_ranks(find(feature_ranks(:,2)<=27),1);
+
+% or 
+% load('feature_ranks.mat')
+% BiomarkersSel=feature_ranks(find(feature_ranks(:,2)<=27),1);
 Housekeeping=setxor(1:size(Data,1),BiomarkersSel);
 data_MZ_HK=data_MZ(Housekeeping,:);
 data_RT_HK=data_RT(Housekeeping,:);
 
 %% Scaling Data 
-
-% % Median Scaling
-% MedianData=median(Data);
-% MedianData=repmat(MedianData,651,1);
-% normdata=Data./MedianData;
-% 
-% 
-% %MAD scaling
-% MadData=mad(Data);
-% MadData=repmat(MadData,651,1);
-% normdata=Data./MadData;
-
 
 
 %MinMax Scaling
@@ -35,7 +36,6 @@ medians=[];
 testmedian=[];
 testmediann=[];
 normdataa=normdata+max(median(normdata,2));
-% normdataa=normdata;
 medians=median(normdataa,2);
 medians=abs(medians);
 test=repmat(medians,1,size(Data,2));
@@ -44,12 +44,10 @@ testmedian=testmediann(Housekeeping,:);
 
 
 %% Surface Fitting
-parfor i =1:20
+parfor i =1:size(testmedian,2)
     [ff]=fittingbysample(testmedian(:,i),data_MZ_HK(:,i),data_RT_HK(:,i),thr);
     fff{i,1}=ff{1,1};
 
-%      figure()
-%     plot(ff, [data_MZ_HK(:,i),data_RT_HK(:,i)], testmedian(:,i))
 end
 
 
@@ -58,5 +56,5 @@ end
 
 
 %% get Final Data
-finaldata=(normdataa(:,1:20))./abs(finaldataN);
+finaldata=(normdataa)./abs(finaldataN);
 
