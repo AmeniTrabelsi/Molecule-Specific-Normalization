@@ -2,7 +2,7 @@
 A molecule specific normalization algorithm which adopts a robust surface fitting strategy to minimize the molecular profile difference of a group of house-keeping molecules across samples.
 
 
-## A schematic flow shows the pipeline
+## A schematic work flow of the MSN method
 ![pipeline](https://github.com/AmeniTrabelsi/Molecule-Specific-Normalization/Work_Flow.jpg)
 
 ## How to run
