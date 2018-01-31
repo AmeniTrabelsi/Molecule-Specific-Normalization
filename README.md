@@ -22,3 +22,7 @@ thr: Boxplot Threshold (ex: 1.5, 2...)
 Output:
 
 finaldata: data after normalization using MSN.
+
+## Dependencies
+libPLS_1.95 is a library to compute the PLS-DA. It can be downloaded from: (http://libpls.net/download.php)
+It is also uploaded with the code.
