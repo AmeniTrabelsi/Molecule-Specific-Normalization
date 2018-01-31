@@ -15,7 +15,7 @@ Modified_data(:,3)=new_data_comp(:,3)+ noise1;
 noise2=(new_data_comp(:,6).*((per*rand(651,1))./10));
 Modified_data(:,6)=new_data_comp(:,6)+ noise2;
 % noise3=(new_data_comp(:,12).*((per*rand(651,1))./10));
-% Modified_data(:,12)=new_data_comp(:,12)+ noise3;
+% Modified_data(:,12)=new_data_comp(:,12)- noise3;
 
 
 
@@ -54,10 +54,24 @@ thr=2;
 
 %% Plot ROC Curve of all the methods
 
-figure();[treshP tp auc]=calc_roc_t(ranks,27,1,'b')
-hold on;[treshP tp auc]=calc_roc_t(ranksf,27,1,'m')
-hold on;[treshP tp auc]=calc_roc_t(ranksContrast,27,1,'c')
-hold on;[treshP tp auc]=calc_roc_t(ranksCyclicLoess,27,1,'r')
-hold on;[treshP tp auc]=calc_roc_t(ranksQuantile,27,1,'g')
-title('ROC for different Normalization methods using PLSDA on Group 0 and 5')
+resp= [ones(1,27) zeros(1,651-27)];
+score= 651-ranks(:,2);
+scoref= 651-ranksf(:,2);
+scoreContrast= 651-ranksContrast(:,2);
+scoreCyclicLoess= 651-ranksCyclicLoess(:,2);
+scoreQuantile= 651-ranksQuantile(:,2);
+
+[tpr, fpr]=roc(resp,score');
+figure(); plot(fpr, tpr,'LineWidth',2)
+[tpr, fpr]=roc(resp,scoref');
+hold on; plot(fpr, tpr,'LineWidth',2)
+[tpr, fpr]=roc(resp,scoreContrast');
+hold on; plot(fpr, tpr,'LineWidth',2)
+[tpr, fpr]=roc(resp,scoreCyclicLoess');
+hold on; plot(fpr, tpr,'LineWidth',2)
+[tpr, fpr]=roc(resp,scoreQuantile');
+hold on; plot(fpr, tpr,'LineWidth',2)
+title('ROC for 6 Normalization methods using PLSDA on G0&5 with 20% noise added to 2 samples')
 legend('No Normalization','MSN','Contrast','Cyclic Loess','Quantile')
+
+
