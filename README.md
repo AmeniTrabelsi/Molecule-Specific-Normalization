@@ -7,7 +7,7 @@ A molecule specific normalization algorithm which adopts a robust surface fittin
 
 ## How to run
 
-1. You can run Test_SurfaceFitting for an example of comparison of MSN with other normalization methods using our mouse liver extraction LC-MS data.
+1. You can run main.m for an example of comparison of MSN with other normalization methods using our mouse liver extraction LC-MS data.
 2. To apply MSN. You can use the function Surf_Fit:
 Example:
 
